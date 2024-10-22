@@ -1,8 +1,7 @@
 import { useState } from "react";
 import BookGrid from "./BookGrid";
-
-import importedBooks from '../data/searchedbooks.json';
 import PropTypes from "prop-types";
+import * as BooksAPI from "../utils/BooksAPI";
 
 const BookSearch = ({onShowSearch, booksOnShelf, onUpdateBook}) => {
     const [searchField,setSearchField] = useState("");
@@ -10,11 +9,17 @@ const BookSearch = ({onShowSearch, booksOnShelf, onUpdateBook}) => {
 
     const handleChange = (event) => {
         
+        const searchValue = event.target.value;
         setSearchField(event.target.value);
+        setSearchedBooks([]);
+        if(searchValue==="") return;
 
-        if(event.target.value==="T")
-        {
-            let updatedBooks = importedBooks.books.map((book) => {
+        const search = async () => {
+            const response = await BooksAPI.search(event.target.value,10);
+            
+            if (response.error) return;
+
+            let updatedBooks = response.map((book) => {
                 
                 let shelf = "none";
                 const onShelf = booksOnShelf.filter((bookOnShelf) => bookOnShelf.id===book.id);
@@ -24,8 +29,9 @@ const BookSearch = ({onShowSearch, booksOnShelf, onUpdateBook}) => {
                     shelf: shelf
                 };
             });
-            setSearchedBooks(updatedBooks);
-        }
+            setSearchedBooks(updatedBooks);            
+        };
+        search();
     }
 
     return (
