@@ -2,20 +2,23 @@
 
 ## What did I do
 - Started from scratch with a new create-react-app
-  Why? because I am using node v20.18.0 and the initail project did not started because of version problems (npm install an npm start gave errors)
+  Why? because I am using node v20.18.0 and the initail project did not started because of version problems (npm install and npm start gave errors)
 - Copied the files from the starter project folder to new react-app folder
 - Started coding and commiting, see commits
-  1. Setup project
-  2. Added all components
-  3. Replace fake data from json files with actual API
-  4. Added react-router and change code for that
-  5. Did some minor changes
-  6. Moved the git repo to parent folder
-  7. Moved code to github
+  - Setup project
+  - Added all components
+  - Replace fake data from json files with actual API
+  - Added react-router and change code for that
+  - Did some minor changes
+  - Moved the git repo to parent folder
+  - Moved code to github
 - Had to change git folder because at first it was in the starter folder
   So move up the git repository to myreads
 - Then add repository to github
+- Did not exactly know how the search API works, only getting books while searching 1 Capital char, but that is enough for testing (SEARCH_TERMS.md not in starter project)
 
+
+## Project
 
 This is the starter template for the final assessment project for Udacity's React Fundamentals course. The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
 
