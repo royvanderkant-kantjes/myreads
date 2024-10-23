@@ -2,8 +2,9 @@ import { useState } from "react";
 import BookGrid from "./BookGrid";
 import PropTypes from "prop-types";
 import * as BooksAPI from "../utils/BooksAPI";
+import { Link } from "react-router-dom";
 
-const BookSearch = ({onShowSearch, booksOnShelf, onUpdateBook}) => {
+const BookSearch = ({booksOnShelf, onUpdateBook}) => {
     const [searchField,setSearchField] = useState("");
     const [searchedBooks, setSearchedBooks] = useState([]);
 
@@ -37,13 +38,7 @@ const BookSearch = ({onShowSearch, booksOnShelf, onUpdateBook}) => {
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <a
-                    href="#"
-                    className="close-search"
-                    onClick={onShowSearch}
-                >
-                    Close
-                </a>
+                <Link className="close-search" to="/" />
                 <div className="search-books-input-wrapper">
                     <input
                         type="text"

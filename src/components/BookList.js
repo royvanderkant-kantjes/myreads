@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import BookShelf from "./BookShelf";
+import { Link } from "react-router-dom";
 
-const BookList = ({onShowSearch,books, onUpdateBook}) => {
+const BookList = ({books, onUpdateBook}) => {
     return(
         <div className="list-books">
         <div className="list-books-title">
@@ -27,7 +28,7 @@ const BookList = ({onShowSearch,books, onUpdateBook}) => {
             </div>
         </div>
         <div className="open-search">
-            <a href="#" onClick={() => onShowSearch()}>Add a book</a>
+            <Link to="/search" />
         </div>
     </div>
     )

@@ -3,14 +3,10 @@ import BookSearch from "./BookSearch";
 import BookList from "./BookList";
 
 import * as BooksAPI from "../utils/BooksAPI";
+import { Route, Routes } from "react-router-dom";
 
 const BookDashboard = () => {
-    const [showSearchPage, setShowSearchpage] = useState(false);
     const [books, setBooks] = useState([]);
-
-    const onShowSearch = () => {
-        setShowSearchpage(!showSearchPage);
-    }
 
     const deleteBook = (deletedBook) => {
         const update = async () => {
@@ -54,22 +50,25 @@ const BookDashboard = () => {
     }
 
     return (
-        <>
-            {showSearchPage ? (
-                <BookSearch
-                    onShowSearch={onShowSearch}
-                    onUpdateBook={onUpdateBook}
-                    booksOnShelf={books}
+        <Routes>
+            <Route 
+                path="search"
+                element ={
+                    <BookSearch
+                        onUpdateBook={onUpdateBook}
+                        booksOnShelf={books} />
+                } 
+            />
+            <Route 
+                path="/"
+                element={
+                    <BookList
+                        onUpdateBook={onUpdateBook}
+                        books={books}
                 />
-            ) : (
-                <BookList
-                    onShowSearch={onShowSearch}
-                    onUpdateBook={onUpdateBook}
-                    books={books}
-                />
-            )}
-        </>
-
+                }
+            />
+        </Routes>
     )
 }
 
