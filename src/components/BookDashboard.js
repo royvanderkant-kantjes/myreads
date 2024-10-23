@@ -10,28 +10,25 @@ const BookDashboard = () => {
 
     const deleteBook = (deletedBook) => {
         const update = async () => {
-            const res = await BooksAPI.update(deletedBook, deletedBook.shelf);
+            await BooksAPI.update(deletedBook, deletedBook.shelf);
             setBooks(books.filter(book => book.id !== deletedBook.id));
         };
         update();
     };
 
     const updateBook = (updatedBook) => {
-        let newBookList = books.filter(book => book.id !== updatedBook.id);
-        newBookList.push(updatedBook);
-
         const update = async () => {
-            const res = await BooksAPI.update(updatedBook, updatedBook.shelf);
+            await BooksAPI.update(updatedBook, updatedBook.shelf);
+            let newBookList = books.filter(book => book.id !== updatedBook.id);
+            newBookList.push(updatedBook);            
             setBooks(newBookList)
         };
-
         update();
     }
 
     const onUpdateBook = (updatedBook) => {
         if (updatedBook.shelf === "none") {
             deleteBook(updatedBook);
-
             return;
         }
         updateBook(updatedBook);

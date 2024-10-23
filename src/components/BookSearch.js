@@ -4,33 +4,35 @@ import PropTypes from "prop-types";
 import * as BooksAPI from "../utils/BooksAPI";
 import { Link } from "react-router-dom";
 
-const BookSearch = ({booksOnShelf, onUpdateBook}) => {
-    const [searchField,setSearchField] = useState("");
+const BookSearch = ({ booksOnShelf, onUpdateBook }) => {
+    const [searchField, setSearchField] = useState("");
     const [searchedBooks, setSearchedBooks] = useState([]);
 
     const handleChange = (event) => {
-        
+        // With every key stroke the API is called (maybe not preferable for a production environment)
         const searchValue = event.target.value;
         setSearchField(event.target.value);
         setSearchedBooks([]);
-        if(searchValue==="") return;
+        if (searchValue === "") return;
 
         const search = async () => {
-            const response = await BooksAPI.search(event.target.value,10);
-            
+            const response = await BooksAPI.search(event.target.value, 20);
+
             if (response.error) return;
 
             let updatedBooks = response.map((book) => {
-                
                 let shelf = "none";
-                const onShelf = booksOnShelf.filter((bookOnShelf) => bookOnShelf.id===book.id);
-                if(onShelf.length===1) shelf = onShelf[0].shelf;
+                // If a book in the searchlist, is also on the booksOnshelfList then determine the right shelf 
+                const onShelf = booksOnShelf.filter((bookOnShelf) => bookOnShelf.id === book.id);
+                // Filter with id always returns 0 or 1 result
+                if (onShelf.length === 1) shelf = onShelf[0].shelf;
+                // add shelf to book object
                 return {
                     ...book,
                     shelf: shelf
                 };
             });
-            setSearchedBooks(updatedBooks);            
+            setSearchedBooks(updatedBooks);
         };
         search();
     }
@@ -50,7 +52,7 @@ const BookSearch = ({booksOnShelf, onUpdateBook}) => {
                 </div>
             </div>
             <div className="search-books-results">
-                <BookGrid books={searchedBooks} onUpdateBook={onUpdateBook}/>
+                <BookGrid books={searchedBooks} onUpdateBook={onUpdateBook} />
             </div>
         </div>
     )
@@ -59,7 +61,6 @@ const BookSearch = ({booksOnShelf, onUpdateBook}) => {
 BookSearch.propTypes = {
     booksOnShelf: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired
-    
 };
 
 export default BookSearch;

@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 const BookShelfChanger = ({shelf, onChangeShelf}) => {
     const [value, setValue] = useState();
 
-    const handleOnChange = (event) => {
-        if(shelf!==event.target.value)
-            onChangeShelf(event.target.value);
+    const handleChange = (event) => {
+        onChangeShelf(event.target.value);
         setValue(event.target.value);        
     }
 
@@ -16,7 +15,7 @@ const BookShelfChanger = ({shelf, onChangeShelf}) => {
 
     return (
         <div className="book-shelf-changer">
-            <select value = {value} onChange={handleOnChange}>
+            <select value = {value} onChange={handleChange}>
                 <option value="disabled" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
