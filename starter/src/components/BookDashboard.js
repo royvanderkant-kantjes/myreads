@@ -19,7 +19,9 @@ const BookDashboard = () => {
     const updateBook = (updatedBook) => {
         const update = async () => {
             await BooksAPI.update(updatedBook, updatedBook.shelf);
+            // first remove the updated book
             let newBookList = books.filter(book => book.id !== updatedBook.id);
+            // then add the updated book again with the new shelf
             newBookList.push(updatedBook);            
             setBooks(newBookList)
         };

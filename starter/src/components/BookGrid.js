@@ -16,7 +16,6 @@ const BookGrid = ({ books, onUpdateBook }) => {
 BookGrid.propTypes = {
     books: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired
-    
 };
 
 export default BookGrid;
